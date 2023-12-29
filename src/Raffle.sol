@@ -37,6 +37,13 @@ contract Raffle is VRFConsumerBaseV2 {
     /** Errors */
     error Raffle__NotEnoughEthSend();
     error Raffle__TransferFailed();
+    error Raffle__RaffleNotOpen();
+
+    /** Type Declarations */
+    enum RaffleState {
+        OPEN, // 0
+        CALCULATING // 1
+    }
 
     /** State Variable */
     uint16 private constant REQUEST_CONFIRMATIONS = 3;
@@ -52,6 +59,7 @@ contract Raffle is VRFConsumerBaseV2 {
     address payable[] private s_players;
     uint256 private s_lastTimeStamp;
     address payable private s_recentWinner;
+    RaffleState private s_raffleState;
 
     /** Events */
     event EnteredRaffle(address indexed player);
@@ -73,6 +81,7 @@ contract Raffle is VRFConsumerBaseV2 {
         i_subscriptionId = subscriptionId;
         i_callbackGasLimit = callbackGasLimit;
 
+        s_raffleState = RaffleState.OPEN;
         s_lastTimeStamp = block.timestamp;
     }
 
@@ -80,6 +89,9 @@ contract Raffle is VRFConsumerBaseV2 {
         // require(msg.value >= i_entranceFee, "Not enough ETH sent");
         if (msg.value < i_entranceFee) {
             revert Raffle__NotEnoughEthSend();
+        }
+        if (s_raffleState != RaffleState.OPEN) {
+            revert Raffle__RaffleNotOpen();
         }
         s_players.push(payable(msg.sender));
         // 1. Makes Migration easier
