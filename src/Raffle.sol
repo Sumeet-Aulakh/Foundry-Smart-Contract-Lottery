@@ -67,6 +67,7 @@ contract Raffle {
         if ((block.timestamp - s_lastTimeStamp) < i_interval) {
             revert();
         }
+        // Random Number: From VRFv2
     }
 
     /** Getter Functions */
