@@ -47,16 +47,17 @@ contract DeployRaffle is Script {
         );
         vm.stopBroadcast();
         AddConsumer addConsumer = new AddConsumer();
-<<<<<<< HEAD
         addConsumer.addConsumer(
             address(raffle),
             vrfCoordinator,
             subscriptionId
         );
-=======
-        addConsumer.addConsumer(address(raffle),vrfCoordinator, subscriptionId);
+        addConsumer.addConsumer(
+            address(raffle),
+            vrfCoordinator,
+            subscriptionId
+        );
 
->>>>>>> 2a0a9e8b1972132175b6d0079d54375caaae60f7
         return (raffle, helperConfig);
     }
 }
