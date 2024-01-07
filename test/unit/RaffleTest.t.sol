@@ -44,8 +44,10 @@ contract RaffleTest is Test {
             subscriptionId,
             callbackGasLimit,
             link,
-            deployerKey
+
         ) = helperConfig.activeNetworkConfig();
+        // Stack too deep error
+        (, , , , , , , deployerKey) = helperConfig.activeNetworkConfig();
     }
 
     function testRaffleInitilizesInOpenState() public view {
