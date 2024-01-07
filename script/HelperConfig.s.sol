@@ -38,7 +38,7 @@ contract HelperConfig is Script {
                 interval: 30,
                 vrfCoordinator: 0x8103B0A8A00be2DDC778e6e7eaa21791Cd364625,
                 gasLane: 0x474e34a077df58807dbe9c96d3c009b23b3c6d0cce433e59bbf5b34f823bc56c,
-                subscriptionId: 1893, // Update this with subId
+                subscriptionId: 8361, // Update this with subId
                 callbackGasLimit: 500000, // 500,000
                 link: 0x779877A7B0D9E8603169DdbD7836e478b4624789,
                 deployerKey: vm.envUint("PRIVATE_KEY")
